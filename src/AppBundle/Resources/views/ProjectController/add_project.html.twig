@@ -1,0 +1,10 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:ProjectController:addProject{% endblock %}
+
+{% block body %}
+<h1>To jest przykładowa strona dodawania projektu</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}

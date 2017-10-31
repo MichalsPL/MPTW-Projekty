@@ -1,0 +1,79 @@
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+
+homepage:
+    path: /
+    defaults: { _controller: AppBundle:IndexPage:index }
+
+project_show_all:
+    path: /project/show/all
+    defaults: { _controller: AppBundle:Project:showProjects }
+
+project_add_form:
+    path: /project/add
+    defaults: { _controller: AppBundle:Project:addProjectForm }
+    methods:  [GET]
+
+project_add:
+    path: /project/add
+    defaults: { _controller: AppBundle:Project:addProject }
+    methods:  POST
+
+project_modify_form:
+    path: /project/modify/{id}
+    defaults: { _controller: AppBundle:Project:modifyProjectForm }
+    methods:  [GET]
+
+project_modify:
+    path: /project/modify/{id}
+    defaults: { _controller: AppBundle:Project:modifyProject }
+    methods:  POST
+
+project_show:
+    path: /project/{id}
+    defaults: { _controller: AppBundle:Project:showProject }
+    methods:  GET
+
+component_add_form:
+    path: /project/{id}/component/{comp_id}/add
+    defaults: { _controller: AppBundle:Project:addComponentForm }
+    methods:  [GET]
+
+component_add:
+    path: /project/{id}/component/{comp_id}/add
+    defaults: { _controller: AppBundle:Project:addComponent }
+    methods:  POST
+
+part_add_form:
+    path: /project/component/{comp_id}/part/add
+    defaults: { _controller: AppBundle:Project:addPartForm }
+    methods:  [GET]
+
+part_add:
+    path: /project/component/{comp_id}/part/add
+    defaults: { _controller: AppBundle:Project:addPart }
+    methods:  POST

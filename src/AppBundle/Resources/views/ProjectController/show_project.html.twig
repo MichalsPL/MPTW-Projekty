@@ -1,0 +1,59 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:ProjectController:addProject{% endblock %}
+
+{% block body %}
+
+    {% macro recursiveCategory(component, project) %}
+        <li>
+            <h4>{{component.getName()}} </h4>
+            <h5> <a href="{{ path('component_add_form',{'id': project.getId(), 'comp_id': component.getId()}) }}">
+                    dodaj podzespół</a>
+                <a href="{{ path('part_add_form',{ 'comp_id': component.getId()}) }}">
+                    dodaj część</a></h5>
+            {% if component.getParts()|length > 0 %}
+                <ul>
+                    {% for part in component.getParts() %}
+                        <li>{{ part.getName() }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if component.getChildrenComponent()|length %}
+                <ul>
+                    {% for child in component.getChildrenComponent %}
+                        {{ _self.recursiveCategory(child, project) }}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endmacro %}
+
+
+    <h1>To jest strona projektu tu się będzie działo</h1>
+    <h2> id projektu {{ project.getId() }}</h2>
+    <h2> nazwa projektu {{ project.getName() }}</h2>
+
+    <h3>nie masz żadych podzespołów dodaj podzespół</h3>
+
+    <a href="{{ path('component_add_form',{'id': project.getId(), 'comp_id': 0}) }}"><h5> dodaj podzespół</h5></a>
+
+
+
+
+
+
+        {% if project.getComponents() %}
+            <div id="categories">
+                <ul>
+                    {% for component in project.getComponents() %}
+                        {{ _self.recursiveCategory(component, project) }}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+
+
+
+{% endblock %}
